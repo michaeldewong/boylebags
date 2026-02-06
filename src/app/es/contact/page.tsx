@@ -1,15 +1,15 @@
-import { content } from "@/content";
+import { contentEs } from "@/content-es";
 import { RenderSections } from "@/components/RenderSections";
 import { ContactForm } from "@/components/ContactForm";
 import type { Metadata } from "next";
 
-const page = content.pages["/contact"];
+const page = contentEs.pages["/contact"];
 
 export const metadata: Metadata = {
   title: page.title,
   description: page.description,
   alternates: {
-    canonical: "/contact",
+    canonical: "/es/contact",
     languages: {
       en: "/contact",
       es: "/es/contact",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default function ContactPageEs() {
   return (
     <div>
       <RenderSections sections={page.sections} />

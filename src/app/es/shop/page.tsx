@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { content } from "@/content";
 import { RenderSections } from "@/components/RenderSections";
+import { contentEs } from "@/content-es";
 import type { Metadata } from "next";
 
 function ProductCard({ product }: { product: typeof content.products[0] }) {
@@ -16,7 +17,7 @@ function ProductCard({ product }: { product: typeof content.products[0] }) {
           ${minPrice.toFixed(2)}
           {minPrice !== maxPrice && ` - $${maxPrice.toFixed(2)}`}
         </span>
-        {" "}per bag
+        {" "}por bolsa
       </div>
       <ul className="mb-6 space-y-2 text-sm text-zinc-600">
         {product.bullets.slice(0, 3).map((bullet, i) => (
@@ -27,22 +28,22 @@ function ProductCard({ product }: { product: typeof content.products[0] }) {
         ))}
       </ul>
       <Link
-        href={`/shop/${product.slug}`}
+        href={`/es/shop/${product.slug}`}
         className="inline-flex w-full items-center justify-center rounded-md bg-black px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-zinc-800"
       >
-        View Kit Details
+        Ver Detalles del Kit
       </Link>
     </div>
   );
 }
 
-const page = content.pages["/shop"];
+const page = contentEs.pages["/shop"];
 
 export const metadata: Metadata = {
   title: page.title,
   description: page.description,
   alternates: {
-    canonical: "/shop",
+    canonical: "/es/shop",
     languages: {
       en: "/shop",
       es: "/es/shop",
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ShopPage() {
+export default function ShopPageEs() {
   return (
     <div>
       <RenderSections sections={page.sections} />

@@ -1,27 +1,10 @@
 import Link from "next/link";
 import type { PageSection, CTA } from "@/content";
+import { TrackedCtas } from "./TrackedCtas";
 
 function Ctas({ ctas }: { ctas?: CTA[] }) {
   if (!ctas?.length) return null;
-  return (
-    <div className="flex flex-wrap gap-4">
-      {ctas.map((cta) => {
-        const base =
-          "inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-colors";
-        const variants: Record<string, string> = {
-          primary: "bg-black text-white hover:bg-zinc-800",
-          secondary: "border-2 border-black text-black hover:bg-black hover:text-white",
-          ghost: "text-black hover:bg-zinc-100",
-        };
-        const cls = `${base} ${variants[cta.variant ?? "primary"] ?? variants.primary}`;
-        return (
-          <Link key={`${cta.href}-${cta.label}`} href={cta.href} className={cls}>
-            {cta.label}
-          </Link>
-        );
-      })}
-    </div>
-  );
+  return <TrackedCtas ctas={ctas} />;
 }
 
 function HeroSection(props: Extract<PageSection, { type: "hero" }>) {

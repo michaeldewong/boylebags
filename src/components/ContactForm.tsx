@@ -1,7 +1,12 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { event } from "@/lib/ga";
+import { getLocaleFromPath } from "@/lib/locale";
 
 export function ContactForm() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,6 +23,28 @@ export function ContactForm() {
     setSubmitting(true);
     setError(null);
 
+    // Basic validation
+    const requiredFields = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    const missingField = Object.entries(requiredFields).find(
+      ([_, value]) => !value || (typeof value === "string" && value.trim() === "")
+    );
+
+    if (missingField) {
+      event("form_error", {
+        form_type: "contact",
+        error_field: missingField[0],
+        locale,
+      });
+      setError("Please fill in all required fields.");
+      setSubmitting(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
@@ -31,6 +58,18 @@ export function ContactForm() {
       const data = await res.json();
 
       if (res.ok && data.ok) {
+        event("form_submit", {
+          form_type: "contact",
+          locale,
+        });
+        
+        // Fire webhook status event if available
+        if (data.webhookStatus === "ok") {
+          event("leadwebhookok", { locale });
+        } else if (data.webhookStatus === "error") {
+          event("leadwebhookerror", { locale });
+        }
+        
         setSubmitted(true);
         setFormData({
           name: "",
@@ -40,10 +79,18 @@ export function ContactForm() {
           message: "",
         });
       } else {
+        event("form_error", {
+          form_type: "contact",
+          locale,
+        });
         setError(data.error || "Failed to submit. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      event("form_error", {
+        form_type: "contact",
+        locale,
+      });
       setError("Network error. Please check your connection and try again.");
     } finally {
       setSubmitting(false);
@@ -152,13 +199,18 @@ export function ContactForm() {
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={submitting}
-          className="w-full rounded-md bg-black px-6 py-4 text-lg font-semibold text-white transition-colors hover:bg-zinc-800 disabled:opacity-50"
-        >
-          {submitting ? "Sending..." : "Send Message"}
-        </button>
+        <div className="space-y-3">
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-full rounded-md bg-black px-6 py-4 text-lg font-semibold text-white transition-colors hover:bg-zinc-800 disabled:opacity-50"
+          >
+            {submitting ? "Sending..." : "Contact Sales"}
+          </button>
+          <p className="text-center text-sm text-zinc-600">
+            We usually reply within 1 business day.
+          </p>
+        </div>
       </form>
     </div>
   );

@@ -1,17 +1,26 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { content } from "@/content";
+import { contentEs } from "@/content-es";
+import { getLocaleFromPath } from "@/lib/locale";
 
 export function SiteFooter() {
-  const { footerLinks, footerLines } = content.site;
+  const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
+  const siteContent = locale === "es" ? contentEs.site : content.site;
+  const { footerLinks, footerLines } = siteContent;
+
   return (
     <footer className="mt-auto w-full border-t border-zinc-200 bg-white">
       <div className="mx-auto max-w-7xl px-4 py-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-md">
             <div className="mb-2 text-lg font-bold text-zinc-900">
-              {content.site.name}
+              {siteContent.name}
             </div>
-            <p className="text-sm text-zinc-600">{content.site.tagline}</p>
+            <p className="text-sm text-zinc-600">{siteContent.tagline}</p>
           </div>
           <div className="flex flex-wrap gap-6">
             {footerLinks.map((link) => (

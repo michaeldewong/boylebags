@@ -7,6 +7,13 @@ const page = content.pages["/"];
 export const metadata: Metadata = {
   title: page.title,
   description: page.description,
+  alternates: {
+    canonical: "/",
+    languages: {
+      en: "/",
+      es: "/es",
+    },
+  },
 };
 
 export default function HomePage() {
