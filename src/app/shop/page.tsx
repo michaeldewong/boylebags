@@ -4,17 +4,17 @@ import { RenderSections } from "@/components/RenderSections";
 import type { Metadata } from "next";
 
 function ProductCard({ product }: { product: typeof content.products[0] }) {
-  // Extract spec snapshot from product (first bullet or decoration info)
-  const specSnapshot = product.bullets[0] || `${product.decoration}`;
+  // Spec snapshot: material / decoration / key feature
+  const specSnapshot = product.decoration;
 
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
       <h3 className="mb-2 text-2xl font-bold text-zinc-900">{product.name}</h3>
       <p className="mb-4 text-zinc-600">{product.shortDesc}</p>
       
-      {/* MOQ Badge */}
+      {/* MOQ Badge - visible on mobile */}
       <div className="mb-3">
-        <span className="inline-block rounded-md bg-zinc-900 px-3 py-1 text-xs font-semibold text-white">
+        <span className="inline-block rounded-md bg-zinc-900 px-3 py-1 text-xs font-semibold text-white sm:text-xs">
           MOQ: 500 pcs
         </span>
       </div>
