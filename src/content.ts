@@ -229,7 +229,7 @@ export const products: Product[] = [
 export const site: SiteConfig = {
   name: "Boyle Bags",
   tagline: "Bags made simple for busy teams.",
-  trustBarText: "4-hour quotes • Proof required • Rush slots limited",
+  trustBarText: "99.8% On-Time Delivery | 150+ Enterprise Clients Served | Factory-Direct QA Vetted",
   navLinks: [
     { href: "/shop", label: "Shop" },
     { href: "/custom", label: "Custom" },
@@ -254,50 +254,31 @@ export const pages: Record<string, PageContent> = {
     sections: [
       {
         type: "hero",
-        title: "Bags made simple for busy Southern California teams.",
+        title: "Custom Corporate Bags. Delivered On-Spec, On-Time.",
         subtitle:
-          "Quick-ship kits, clean branding, and a reorder program that fits how you work.",
-        bullets: [
-          "Fast quotes. Clear proofs. No surprises.",
-          "Low minimums for local teams and events.",
-          "Easy reorders + consistent supply.",
-        ],
+          "Reliable high-volume fulfillment for US B2B buyers. Eliminate sourcing risk with our fixed-deadline production schedule.",
         primaryCta: {
-          href: "/shop",
-          label: "Shop Quick-Ship Kits",
+          href: "/custom",
+          label: "Get Tiered Quote (MOQ Applies)",
           variant: "primary",
         },
-        secondaryCta: {
-          href: "/custom",
-          label: "Request a Custom Quote",
-          variant: "secondary",
-        },
-      },
-      {
-        type: "featureGrid",
-        title: "How We Work",
-        items: [
-          {
-            title: "Shop Kits",
-            description:
-              "Choose from three proven kits with transparent pricing. Fast-turn options available.",
-          },
-          {
-            title: "Custom Quote",
-            description:
-              "Submit your requirements and receive a detailed quote within 4 hours.",
-          },
-          {
-            title: "Reorder Program",
-            description:
-              "Set up recurring orders with baseline quantities and flexible scheduling.",
-          },
-        ],
       },
       {
         type: "callout",
-        title: "Local SoCal support. Fast response. Straightforward recommendations.",
-        body: "We understand Southern California businesses and deliver bags that fit your workflow.",
+        title: "Start Your Volume Order",
+        body: "We specialize in custom volume fulfillment. Minimum Order Quantity (MOQ) for production runs starts at 500 units.",
+        ctas: [
+          {
+            href: "/custom",
+            label: "Get Tiered Quote (MOQ Applies)",
+            variant: "primary",
+          },
+          {
+            href: "/sample-pack",
+            label: "Request Material Samples",
+            variant: "secondary",
+          },
+        ],
       },
     ],
   },
@@ -309,7 +290,7 @@ export const pages: Record<string, PageContent> = {
         type: "hero",
         title: "Quick-Ship Kits",
         subtitle:
-          "Three proven options with transparent pricing and fast turnaround.",
+          "Transparent pricing. Fast local fulfillment. Pre-configured kits ready for quick turnaround.",
       },
     ],
   },
@@ -321,7 +302,7 @@ export const pages: Record<string, PageContent> = {
         type: "hero",
         title: "Service Levels",
         subtitle:
-          "We sell certainty and service, not commodity bags. Three service levels designed for different needs: Quick-Ship for fast turnaround, Premium Finish for retail quality, and Swag Stash for ongoing programs.",
+          "Three service levels for different needs: Quick-Ship for urgent events, Premium Finish for retail quality, and Swag Stash for ongoing programs.",
       },
       {
         type: "steps",
@@ -356,17 +337,17 @@ export const pages: Record<string, PageContent> = {
           {
             title: "Quick-Ship",
             description:
-              "Perfect for urgent events and last-minute needs. 2-5 business days. Limited slots available. Full payment required upfront. $150 flat rush fee.",
+              "For schools and teams with urgent events. Fast 2-5 day turnaround. Limited slots. Full payment upfront. $150 rush fee. Best when you need bags fast.",
           },
           {
             title: "Premium Finish",
             description:
-              "Retail-ready quality with enhanced materials and finishes. 5-10 business days. Includes one revision. Deposit required, balance due before shipping.",
+              "For retail stores and brands needing consistent quality. 5-10 business days. One revision included. Deposit required. Best for repeat orders with consistent specs.",
           },
           {
             title: "Swag Stash Program",
             description:
-              "Ongoing program service with scheduled recurring orders. Baseline quantities, consistent supply. Storage options available. Flexible scheduling.",
+              "For distributors and businesses with ongoing needs. Scheduled recurring orders. Baseline quantities ready. Storage available. Best for operational ease and consistent supply.",
           },
         ],
       },
@@ -492,21 +473,15 @@ export const pages: Record<string, PageContent> = {
     ],
   },
   "/custom": {
-    title: "Custom Quote",
-    description: "Request a custom bag quote",
+    title: "Volume Quotation Request (500+ Units)",
+    description:
+      "Submit your requirements for custom volume fulfillment. Guaranteed timeline and full cost transparency.",
     sections: [
       {
         type: "hero",
-        title: "Request a Custom Quote",
+        title: "Volume Quotation Request (500+ Units)",
         subtitle:
-          "Tell us about your bag needs and we'll provide a detailed quote within 4 hours.",
-      },
-      {
-        type: "form",
-        title: "Custom RFQ Form",
-        description:
-          "Fill out the form below with your requirements and we'll send you a detailed quote.",
-        formId: "custom-rfq",
+          "Submit your requirements below. We guarantee precision delivery on our stated production timelines for orders meeting our minimum volume requirement.",
       },
     ],
   },
@@ -537,12 +512,12 @@ export const pages: Record<string, PageContent> = {
         type: "hero",
         title: "Contact Us",
         subtitle:
-          "Have questions? Need a quote? We're here to help. Get in touch and we'll respond within 4 business hours.",
+          "Have questions? Need a quote? Email us at sales@boylebags.com or use the form below. We usually reply within 1 business day.",
       },
       {
         type: "callout",
         title: "Get in Touch",
-        body: "Phone: +1 (XXX) XXX-XXXX | Email: sales@boylebags.com",
+        body: "Email: sales@boylebags.com | We usually reply within 1 business day.",
         ctas: [
           {
             href: "mailto:sales@boylebags.com",
@@ -555,7 +530,7 @@ export const pages: Record<string, PageContent> = {
         type: "form",
         title: "Send us a message",
         description:
-          "Fill out the form below and we'll get back to you within 4 business hours.",
+          "Fill out the form below or email us directly at sales@boylebags.com. We usually reply within 1 business day.",
         formId: "contact",
       },
     ],
