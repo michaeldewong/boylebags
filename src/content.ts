@@ -283,14 +283,24 @@ export const pages: Record<string, PageContent> = {
     ],
   },
   "/shop": {
-    title: "Shop",
-    description: "Quick-ship bag kits",
+    title: "Custom Bag Manufacturing – Bulk & Wholesale",
+    description: "Factory-direct pricing for brands and events. Minimum Order Quantity: 500 Units.",
     sections: [
       {
         type: "hero",
-        title: "Quick-Ship Kits",
+        title: "Custom Bag Manufacturing – Bulk & Wholesale",
         subtitle:
-          "Transparent pricing. Fast local fulfillment. Pre-configured kits ready for quick turnaround.",
+          "Factory-direct pricing for brands and events. Minimum Order Quantity: 500 Units.",
+        primaryCta: {
+          href: "/custom",
+          label: "Start High-Volume Quote",
+          variant: "primary",
+        },
+        secondaryCta: {
+          href: "/sample-pack",
+          label: "Request Sample Pack",
+          variant: "secondary",
+        },
       },
     ],
   },

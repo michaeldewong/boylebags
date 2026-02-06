@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { usePathname } from "next/navigation";
+import { useState, useMemo, useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { event } from "@/lib/ga";
 import { getLocaleFromPath } from "@/lib/locale";
 import { addBusinessDays, toDateInputValue } from "@/lib/businessDays";
@@ -66,6 +66,7 @@ function usPhoneRegex(): RegExp {
 
 export function CustomRFQForm() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const locale = getLocaleFromPath(pathname);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -75,16 +76,30 @@ export function CustomRFQForm() {
 
   const minDeliveryDate = useMemo(() => getMinDeliveryDate(), []);
 
+  // Pre-fill from URL params (from product detail page)
+  const urlQuantity = searchParams?.get("quantity");
+  const urlProductInterest = searchParams?.get("productInterest");
+
   const [formData, setFormData] = useState({
-    quantity: "",
+    quantity: urlQuantity || "",
     targetDeliveryDate: "",
-    productInterest: "",
+    productInterest: urlProductInterest || "",
     applicationUse: "",
     companyName: "",
     workEmail: "",
     contactPhone: "",
     specificRequirements: "",
   });
+
+  // Update form if URL params change
+  useEffect(() => {
+    if (urlQuantity) {
+      setFormData((prev) => ({ ...prev, quantity: urlQuantity }));
+    }
+    if (urlProductInterest) {
+      setFormData((prev) => ({ ...prev, productInterest: urlProductInterest }));
+    }
+  }, [urlQuantity, urlProductInterest]);
 
   const quantityNum = formData.quantity === "" ? 0 : parseInt(formData.quantity, 10);
   const meetsMOQ = !isNaN(quantityNum) && quantityNum >= MOQ_MIN;
@@ -299,6 +314,15 @@ export function CustomRFQForm() {
                     {opt}
                   </option>
                 ))}
+                {/* Show custom product name from URL if not in standard options */}
+                {formData.productInterest &&
+                  !PRODUCT_INTEREST_OPTIONS.includes(
+                    formData.productInterest as typeof PRODUCT_INTEREST_OPTIONS[number]
+                  ) && (
+                    <option value={formData.productInterest}>
+                      {formData.productInterest}
+                    </option>
+                  )}
               </select>
             </div>
             <div>
