@@ -1,3 +1,4 @@
+'use client';
 import { content } from "@/content";
 import { RenderSections } from "@/components/RenderSections";
 import { CustomRFQForm } from "@/components/CustomRFQForm";
