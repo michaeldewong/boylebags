@@ -1,7 +1,9 @@
+import CustomClient from "./CustomClient";
 import { contentEs } from "@/content-es";
 import { RenderSections } from "@/components/RenderSections";
-import { CustomRFQForm } from "@/components/CustomRFQForm";
 import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 const page = contentEs.pages["/custom"] || {
   title: "Cotización Personalizada",
@@ -32,7 +34,7 @@ export default function CustomPageEs() {
   return (
     <div>
       <RenderSections sections={page.sections} />
-      <CustomRFQForm />
+      <CustomClient />
     </div>
   );
 }

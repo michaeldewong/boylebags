@@ -1,8 +1,9 @@
-'use client';
+import CustomClient from "./CustomClient";
 import { content } from "@/content";
 import { RenderSections } from "@/components/RenderSections";
-import { CustomRFQForm } from "@/components/CustomRFQForm";
 import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 const page = content.pages["/custom"] || {
   title: "Volume Quotation Request (500+ Units)",
@@ -38,22 +39,9 @@ export const metadata: Metadata = {
 
 export default function CustomPage() {
   return (
-    <div>
+    <>
       <RenderSections sections={page.sections} />
-      <section className="mx-auto max-w-2xl px-4 py-8">
-        <h2 className="mb-6 text-xl font-semibold text-zinc-900">
-          What You Get / What To Expect
-        </h2>
-        <ul className="space-y-3 text-zinc-700">
-          {whatYouGetBullets.map((text, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="text-black">•</span>
-              <span>{text}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-      <CustomRFQForm />
-    </div>
+      <CustomClient />
+    </>
   );
 }
