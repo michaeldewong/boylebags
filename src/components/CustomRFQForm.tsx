@@ -158,7 +158,7 @@ export function CustomRFQForm() {
       errs.specificRequirements = `Maximum ${SPECIFIC_REQUIREMENTS_MAX} characters.`;
     }
     setFieldErrors(errs);
-    return Object.keys(errs).length === 0 && canSubmit;
+    return Object.keys(errs).length === 0 && BooleancanSubmit;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
