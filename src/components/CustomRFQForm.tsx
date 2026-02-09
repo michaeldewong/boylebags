@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { event } from "@/lib/ga";
 import { getLocaleFromPath } from "@/lib/locale";
+import { SHOP_KITS } from "@/lib/shopKits";
 import { addBusinessDays, toDateInputValue } from "@/lib/businessDays";
 
 const MOQ_MIN = 500;
@@ -76,9 +77,12 @@ export function CustomRFQForm() {
 
   const minDeliveryDate = useMemo(() => getMinDeliveryDate(), []);
 
-  // Pre-fill from URL params (from product detail page)
+  // Pre-fill from URL params (product detail page or shop /custom?kit=...)
   const urlQuantity = searchParams?.get("quantity");
-  const urlProductInterest = searchParams?.get("productInterest");
+  const kitId = searchParams?.get("kit");
+  const kitMatch = kitId ? SHOP_KITS.find((k) => k.id === kitId) : null;
+  const urlProductInterest =
+    searchParams?.get("productInterest") || kitMatch?.name || "";
 
   const [formData, setFormData] = useState({
     quantity: urlQuantity || "",

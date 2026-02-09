@@ -59,10 +59,44 @@ export const SHOP_KITS: ShopKit[] = [
   },
 ];
 
-if (typeof process !== "undefined" && process.env.NODE_ENV === "development") {
-  if (SHOP_KITS.length < EXPECTED_SHOP_KIT_COUNT) {
-    console.warn(
-      `[shopKits] Expected at least ${EXPECTED_SHOP_KIT_COUNT} kits; got ${SHOP_KITS.length}. Local may not match production.`
+const REQUIRED_KIT_KEYS: (keyof ShopKit)[] = [
+  "id",
+  "name",
+  "description",
+  "moq",
+  "pricingModel",
+  "productionNotes",
+  "ctaLabel",
+  "ctaHref",
+];
+
+function assertShopKits(): void {
+  if (SHOP_KITS.length !== EXPECTED_SHOP_KIT_COUNT) {
+    throw new Error(
+      `[shopKits] SHOP_KITS must have exactly ${EXPECTED_SHOP_KIT_COUNT} items; got ${SHOP_KITS.length}. Fix src/lib/shopKits.ts.`
     );
   }
+  for (let i = 0; i < SHOP_KITS.length; i++) {
+    const kit = SHOP_KITS[i];
+    for (const key of REQUIRED_KIT_KEYS) {
+      const val = kit[key];
+      if (val === undefined || val === null) {
+        throw new Error(
+          `[shopKits] Kit at index ${i} (id: ${kit.id}) missing required field: ${key}`
+        );
+      }
+    }
+    if (!Array.isArray(kit.productionNotes)) {
+      throw new Error(
+        `[shopKits] Kit at index ${i} (id: ${kit.id}) productionNotes must be an array`
+      );
+    }
+    if (typeof kit.moq !== "number" || kit.moq < 0) {
+      throw new Error(
+        `[shopKits] Kit at index ${i} (id: ${kit.id}) moq must be a non-negative number`
+      );
+    }
+  }
 }
+
+assertShopKits();
