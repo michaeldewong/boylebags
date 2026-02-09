@@ -1,4 +1,4 @@
-import { ProductCard } from "@/components/ProductCard";
+import { ShopKitCard } from "@/components/ShopKitCard";
 import { content } from "@/content";
 import { RenderSections } from "@/components/RenderSections";
 import { SHOP_KITS } from "@/lib/shopKits";
@@ -105,10 +105,32 @@ export default function ShopPage() {
 
       <TrustReinforcementLayer />
 
-      <section className="mx-auto max-w-6xl px-4 py-16">
+      {/* Qualification Gate */}
+      <section className="mx-auto max-w-6xl px-4 py-8">
+        <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-6 text-center">
+          <h2 className="mb-2 text-xl font-semibold text-zinc-900">
+            Commercial Orders Only
+          </h2>
+          <p className="mb-6 text-zinc-700">
+            Minimum order 500 units. We support organizations and programs
+            ordering at scale.
+          </p>
+          <a
+            href="#shop-kits"
+            className="inline-flex items-center justify-center rounded-md bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-zinc-800"
+          >
+            Confirm Eligibility
+          </a>
+        </div>
+      </section>
+
+      <section
+        id="shop-kits"
+        className="mx-auto max-w-6xl px-4 py-16 scroll-mt-8"
+      >
         <div className="grid gap-8 md:grid-cols-3">
           {SHOP_KITS.map((kit) => (
-            <ProductCard key={kit.id} kit={kit} />
+            <ShopKitCard key={kit.id} kit={kit} />
           ))}
         </div>
       </section>

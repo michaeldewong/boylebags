@@ -158,6 +158,10 @@ export const addOns: AddOn[] = [
   },
 ];
 
+/**
+ * Product catalog for PDPs (e.g. /shop/[slug]) and other references.
+ * The shop listing grid on /shop uses the canonical source: lib/shopKits.ts (SHOP_KITS).
+ */
 export const products: Product[] = [
   {
     slug: "event-saver-kit",
