@@ -1,41 +1,8 @@
-import Link from "next/link";
+import { ProductCard } from "@/components/ProductCard";
 import { content } from "@/content";
 import { RenderSections } from "@/components/RenderSections";
+import { SHOP_KITS } from "@/lib/shopKits";
 import type { Metadata } from "next";
-
-function ProductCard({ product }: { product: typeof content.products[0] }) {
-  // Spec snapshot: material / decoration / key feature
-  const specSnapshot = product.decoration;
-
-  return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-      <h3 className="mb-2 text-2xl font-bold text-zinc-900">{product.name}</h3>
-      <p className="mb-4 text-zinc-600">{product.shortDesc}</p>
-      
-      {/* MOQ Badge - visible on mobile */}
-      <div className="mb-3">
-        <span className="inline-block rounded-md bg-zinc-900 px-3 py-1 text-xs font-semibold text-white sm:text-xs">
-          MOQ: 500 pcs
-        </span>
-      </div>
-
-      {/* Pricing Label (text only) */}
-      <div className="mb-4 text-sm font-medium text-zinc-700">
-        Volume-Based Pricing
-      </div>
-
-      {/* 1-line spec snapshot */}
-      <p className="mb-6 text-sm text-zinc-600">{specSnapshot}</p>
-
-      <Link
-        href={`/shop/${product.slug}`}
-        className="inline-flex w-full items-center justify-center rounded-md border-2 border-zinc-900 bg-white px-6 py-3 text-sm font-semibold text-zinc-900 transition-colors hover:bg-zinc-50"
-      >
-        View Specs & Quote
-      </Link>
-    </div>
-  );
-}
 
 const page = content.pages["/shop"];
 
@@ -140,8 +107,8 @@ export default function ShopPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="grid gap-8 md:grid-cols-3">
-          {content.products.map((product) => (
-            <ProductCard key={product.slug} product={product} />
+          {SHOP_KITS.map((kit) => (
+            <ProductCard key={kit.id} kit={kit} />
           ))}
         </div>
       </section>
